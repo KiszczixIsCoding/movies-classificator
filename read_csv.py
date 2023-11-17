@@ -6,13 +6,20 @@ from movie_evaluation import MovieEvaluation
 def read_csv():
     with open('movie/movie.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+        movies_list = []
         for row in spamreader:
-            print(', '.join(row))
+            movies_list.append(row[1])
+        return movies_list
 
-def read_csv1():
-    with open('movie/train.csv', newline='') as csvfile:
+
+def read_csv1(is_train):
+    if is_train:
+        filename = 'train.csv'
+    else:
+        filename = 'task.csv'
+
+    with open('movie/' + filename, newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-
         dict = {}
         for row in spamreader:
             movie_evaluation = MovieEvaluation(movie_id=row[2], evaluation=row[3])
@@ -20,5 +27,5 @@ def read_csv1():
                 dict[row[1]] = []
             dict[row[1]].append(movie_evaluation)
 
-        print(len(dict['1642']))
+        return dict
 
