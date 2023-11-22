@@ -10,8 +10,8 @@ def main():
     test_evaluations = read_csv1(is_train=False)
 
     movies_list = {}
-    for x in movies:
-        movies_list.update(fetch_movie_data(x))
+    for index, row in movies.iterrows():
+        movies_list.update(fetch_movie_data(row["tmdb_id"]))
 
     for user_id in train_evaluations.keys():
         all_evaluations = train_evaluations[user_id]
@@ -19,10 +19,11 @@ def main():
         for test_eval in test_evaluations[user_id]:
             arr = []
             for train_eval in train_evaluations[user_id]:
-                print(test_eval.movie_id)
-                print(train_eval.movie_id)
-                score = count_movies_distance(movies_list[test_eval.movie_id], movies_list[train_eval.movie_id])
-                arr = arr.append([train_eval, score])
+                test_id = movies.loc[movies['id'] == test_eval.movie_id].iloc[0]['tmdb_id']
+                print(type(test_id))
+                train_id = movies.loc[movies['id'] == test_eval.movie_id].iloc[0]['tmdb_id']
+                score = count_movies_distance(movies_list[test_id], movies_list[train_id])
+                arr.append([train_eval, score])
             # test_label = knn_classify()
     # max_budget = max(movies_list.values(), key=lambda x: x['budget'])['budget']
     # max_runtime = max(movies_list.values(), key=lambda x: x['runtime'])['runtime']

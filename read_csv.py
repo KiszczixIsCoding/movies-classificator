@@ -1,6 +1,7 @@
 import csv
 
 from movie_evaluation import MovieEvaluation
+import pandas as pd
 
 
 def read_csv():
@@ -8,8 +9,10 @@ def read_csv():
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         movies_list = []
         for row in spamreader:
-            movies_list.append(row[1])
-        return movies_list
+            movies_list.append({'id': row[0], "tmdb_id": row[1]})
+
+        df = pd.DataFrame(movies_list)
+        return df
 
 
 def read_csv1(is_train):
