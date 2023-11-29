@@ -2,7 +2,7 @@ import csv
 
 from movie_evaluation import MovieEvaluation
 import pandas as pd
-
+import numpy as np
 
 def read_csv():
     with open('movie/movie.csv', newline='') as csvfile:
@@ -27,8 +27,8 @@ def read_csv1(is_train):
         for row in spamreader:
             movie_evaluation = MovieEvaluation(movie_id=row[2], evaluation=row[3])
             if row[1] not in dict.keys():
-                dict[row[1]] = []
-            dict[row[1]].append(movie_evaluation)
+                dict[row[1]] = np.array([])
+            dict[row[1]] = np.concatenate((dict[row[1]], np.array([movie_evaluation])))
 
         return dict
 

@@ -14,6 +14,8 @@ def get_movie_details(movie_id):
     budget = response.json()['budget']
     runtime = response.json()['runtime']
     overview = response.json()['overview']
+    vote_average = response.json()['vote_average']
+    revenue = response.json()['revenue']
 
     genre_ids = [entry["id"] for entry in response.json()['genres']]
     return {
@@ -21,7 +23,10 @@ def get_movie_details(movie_id):
         'release_date': release_date_obj.year,
         'budget': budget,
         'genre_ids': genre_ids,
-        'runtime': runtime
+        'runtime': runtime,
+        'overview': overview,
+        'vote_average': vote_average,
+        'revenue': revenue
     }
 
 def get_movie_keywords(movie_id):
@@ -40,6 +45,7 @@ def get_movie_actors(movie_id):
     response = requests.get(api_url)
     res = {key: response.json()[key] for key in response.json().keys()
            & {'id', 'cast'}}
+
     cast_ids = [entry["id"] for entry in response.json()['cast'][0:10]]
     crew_ids = [entry["id"] for entry in response.json()['crew'][0:3]]
     return {'cast_ids': cast_ids, 'crew_ids': crew_ids}
