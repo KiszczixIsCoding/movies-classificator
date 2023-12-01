@@ -6,6 +6,6 @@ def knn_classify(n_neighbours, user_evaluations, ranking):
     evals = []
     for x in sorted_array:
         evals += x.evaluation
-    counter = Counter(sorted_array[0:n_neighbours])
+    counter = Counter(evals)
     most_common_element = counter.most_common(1)[0][0]
     return most_common_element

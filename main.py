@@ -45,14 +45,14 @@ def main():
             for x in train_evaluations[user_id]:
                 evals += x.evaluation
 
-            # print(knn_classify(5, train_evaluations[user_id], ranking))
-            test_label = classify(ranking.values, np.array(evals), last_element.values)
+            test_label = knn_classify(5, train_evaluations[user_id], ranking)
+            # test_label = classify(ranking.values, np.array(evals), last_element.values)
             test_eval.evaluation = test_label
             iter = iter + 1
-        flattened_values = [item for sublist in test_evaluations.values() for item in sublist]
-        flattened_list = [(m.eval_id, m.user_id, m.movie_id, m.evaluation) for m in flattened_values]
-        write_dict("tree.csv", flattened_list)
-        break
+    flattened_values = [item for sublist in test_evaluations.values() for item in sublist]
+    flattened_list = [(m.eval_id, m.user_id, m.movie_id, m.evaluation) for m in flattened_values]
+    write_dict("output/knn.csv", flattened_list)
+
     # Flatten lists in dictionary values
     # flattened_values = [item for sublist in test_evaluations.values() for item in sublist]
     # flattened_list = [(m.id, m.user_id, m.movie_id, m.evaluation) for m in flattened_values]
