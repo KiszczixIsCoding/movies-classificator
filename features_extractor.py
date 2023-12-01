@@ -13,14 +13,14 @@ def count_text_distance(text1, text2):
     texts = [text1, text2]
     vectorizer = CountVectorizer()
     vectorized_texts = vectorizer.fit_transform(texts)
-    cosine_sim = cosine_similarity(vectorized_texts)
-
+    cosine_sim = cosine_similarity(vectorized_texts)[0][0]
     return cosine_sim
 
 def fetch_movie_data(movie_id):
     dic1 = get_movie_keywords(movie_id)
     dic2 = get_movie_actors(movie_id)
     dic3 = get_movie_details(movie_id)
+    print(movie_id)
     dic = {**dic1, **dic2, **dic3}
     return {movie_id: dic}
 

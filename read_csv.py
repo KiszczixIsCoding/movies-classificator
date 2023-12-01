@@ -25,7 +25,7 @@ def read_csv1(is_train):
         spamreader = csv.reader(csvfile, delimiter=';', quotechar='|')
         dict = {}
         for row in spamreader:
-            movie_evaluation = MovieEvaluation(movie_id=row[2], evaluation=row[3])
+            movie_evaluation = MovieEvaluation(eval_id=row[0], user_id=row[1], movie_id=row[2], evaluation=row[3])
             if row[1] not in dict.keys():
                 dict[row[1]] = np.array([])
             dict[row[1]] = np.concatenate((dict[row[1]], np.array([movie_evaluation])))
