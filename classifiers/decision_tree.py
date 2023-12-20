@@ -3,10 +3,12 @@ from sklearn.tree import DecisionTreeClassifier
 
 from classifiers.visualizer import draw_tree
 
-def classify(X_train, Y_train, X_test):
+def tree_classify(X_train, Y_train, X_test):
     clf = DecisionTreeClassifier(max_depth=3, max_features='sqrt')
     print(len(X_train))
     print(len(Y_train.reshape(-1, 1)))
+    print(Y_train.reshape(-1, 1).shape)
+
     clf.fit(X_train, Y_train.reshape(-1, 1))
     #
     # param_grid = {
@@ -31,5 +33,5 @@ def classify(X_train, Y_train, X_test):
     # print("Best Estimator:", best_estimator)
     # print("Best Accuracy:", best_accuracy)
     #
-    # draw_tree(clf)
+    draw_tree(clf)
     return int(clf.predict(X_test.reshape(1, -1))[0])
