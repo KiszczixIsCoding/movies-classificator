@@ -30,7 +30,6 @@ def get_movie_details(movie_id):
     }
 
 def get_movie_keywords(movie_id):
-    # api_url = base_url + api_key
     api_url = "https://api.themoviedb.org/3/movie/" + str(movie_id) + "/keywords" + api_key
     response = requests.get(api_url)
     keyword_ids = [entry["id"] for entry in response.json()['keywords']]

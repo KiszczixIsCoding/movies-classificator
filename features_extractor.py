@@ -20,7 +20,7 @@ def fetch_movie_data(movie_id):
     dic1 = get_movie_keywords(movie_id)
     dic2 = get_movie_actors(movie_id)
     dic3 = get_movie_details(movie_id)
-    print(movie_id)
+
     dic = {**dic1, **dic2, **dic3}
     return {movie_id: dic}
 

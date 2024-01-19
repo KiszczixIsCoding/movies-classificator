@@ -33,5 +33,5 @@ def tree_classify(X_train, Y_train, X_test):
     # print("Best Estimator:", best_estimator)
     # print("Best Accuracy:", best_accuracy)
     #
-    draw_tree(clf)
+    # draw_tree(clf)
     return int(clf.predict(X_test.reshape(1, -1))[0])
